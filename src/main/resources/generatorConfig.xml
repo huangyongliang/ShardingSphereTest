@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry location="/Users/huangyongliang/Downloads/repository/mysql/mysql-connector-java/8.0.23/mysql-connector-java-8.0.23.jar"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3">
+
+
+        <property name="author" value="huangyl"/>
+
+        <property name="lombokEnabled" value="true"/>
+        <property name="builder" value="LOCAL_SUPER_BUILDER"/>
+
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!--把Example文件位置隔离开-->
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value=".model."/>
+            <property name="replaceString" value=".example."/>
+        </plugin>
+
+        <!--对数据库密码解密的工具-->
+        <connectionFactory
+                type="org.mybatis.generator.internal.JDBCConnectionFactory">
+            <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="connectionURL" value="jdbc:mysql://127.0.0.1:3306/sharding"/>
+            <property name="userId" value="root"/>
+            <property name="password" value="12345678"/>
+        </connectionFactory>
+
+        <javaModelGenerator targetPackage="com.hyl.shardingspheretest.dao.model"
+                            targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="com.hyl.shardingspheretest.dao.sqlmap"
+                         targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="com.hyl.shardingspheretest.dao.mapper"
+                             targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <table tableName="sharding_first"
+               domainObjectName="ShardingFirstDo" escapeWildcards="true">
+        </table>
+
+
+    </context>
+
+</generatorConfiguration>
+
+
